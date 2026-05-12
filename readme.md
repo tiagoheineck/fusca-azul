@@ -46,4 +46,61 @@ O **Fusca Azul** é um aplicativo de estudo para aulas de microserviços, voltad
 
 ![Arquitetura do Fusca Azul](./arquitetura-fusca-azul.svg)
 
+O diagrama apresenta uma arquitetura em camadas: clientes Web/Mobile consomem a SPA, que acessa o backend via API Gateway (Kong). No backend, cada capacidade de negocio (autenticacao, usuarios, fotos, soquinho, contestacao, denuncia e moderacao) fica em um microservico independente, com comunicacao sincrona para operacoes de consulta/comando e assincrona por eventos para fluxos de denuncia, revisao e atualizacao de ranking. A persistencia e desacoplada em uma camada de infraestrutura com Postgres, Redis, RabbitMQ e SeaweedFS (S3 compativel), permitindo evolucao gradual para isolamento de dados por microservico.
+
+## Como subir todo o conjunto
+
+### Pré-requisitos
+- Docker 24+ instalado
+- Docker Compose v2 instalado (`docker compose version`)
+- Portas livres na máquina: 5173, 8000, 8001, 5432, 5672, 6379, 8333, 8888, 9333, 15672
+
+### 1. Validar a configuração
+```bash
+docker compose config
+```
+
+### 2. Subir toda a infraestrutura
+```bash
+docker compose up -d
+```
+
+### 3. Verificar status dos serviços
+```bash
+docker compose ps
+```
+
+### 4. Acessar os serviços
+- SPA Frontend: http://localhost:5173
+- Kong (proxy): http://localhost:8000
+- Kong Admin API: http://localhost:8001
+- RabbitMQ Management: http://localhost:15672
+- Postgres: localhost:5432
+- Redis: localhost:6379
+- SeaweedFS S3 API: http://localhost:8333
+- SeaweedFS UI/Filer: http://localhost:8888
+- SeaweedFS Master status: http://localhost:9333/cluster/status
+
+### 5. Credenciais padrão do ambiente (desenvolvimento)
+- Postgres: usuário `fusca`, senha `fusca123`, banco `fusca_azul`
+- RabbitMQ: usuário `fusca`, senha `fusca123`
+- SeaweedFS S3: access key `fusca`, secret key `fusca123`
+
+### 6. Ver logs em tempo real
+```bash
+docker compose logs -f
+```
+
+### 7. Parar toda a infraestrutura
+```bash
+docker compose down
+```
+
+### 8. Parar e remover volumes (reset completo)
+```bash
+docker compose down -v
+```
+
+
+
 

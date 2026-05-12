@@ -1,0 +1,9 @@
+_format_version: "3.0"
+_transform: true
+
+# Configuracao inicial em modo DB-less.
+# Adicione services/routes dos microservicos aqui conforme forem criados.
+services: []
+routes: []
+consumers: []
+plugins: []

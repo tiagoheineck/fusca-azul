@@ -1,0 +1,135 @@
+services:
+  spa-frontend:
+    image: nginx:1.27-alpine
+    container_name: fusca-spa-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html:ro
+    networks:
+      - fusca-net
+    depends_on:
+      api-gateway:
+        condition: service_started
+
+  api-gateway:
+    image: kong:3.8
+    container_name: fusca-kong
+    restart: unless-stopped
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /opt/kong/kong.yml
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "8001:8001"
+      - "8444:8444"
+    volumes:
+      - ./kong/kong.yml:/opt/kong/kong.yml:ro
+    networks:
+      - fusca-net
+    healthcheck:
+      test: ["CMD", "kong", "health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: fusca-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: fusca
+      RABBITMQ_DEFAULT_PASS: fusca123
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - fusca-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: fusca-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: fusca_azul
+      POSTGRES_USER: fusca
+      POSTGRES_PASSWORD: fusca123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - fusca-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fusca -d fusca_azul"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+
+  redis:
+    image: redis:7-alpine
+    container_name: fusca-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - fusca-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+
+  seaweedfs:
+    image: chrislusf/seaweedfs:3.84
+    container_name: fusca-seaweedfs
+    restart: unless-stopped
+    command:
+      - server
+      - -dir=/data
+      - -s3
+      - -s3.config=/etc/seaweedfs/s3.conf
+      - -ip.bind=0.0.0.0
+      - -master.volumeSizeLimitMB=1024
+    ports:
+      - "8333:8333"
+      - "8888:8888"
+      - "9333:9333"
+    volumes:
+      - seaweedfs_data:/data
+      - ./seaweedfs/s3.conf:/etc/seaweedfs/s3.conf:ro
+    networks:
+      - fusca-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:9333/cluster/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+networks:
+  fusca-net:
+    name: fusca-net
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  rabbitmq_data:
+  seaweedfs_data:
