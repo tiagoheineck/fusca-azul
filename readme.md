@@ -44,6 +44,6 @@ O **Fusca Azul** é um aplicativo de estudo para aulas de microserviços, voltad
 
 # Arquitetura do Fusca Azul
 
-![Arquitetura do Fusca Azul](./arquitetura-fusca-azul.png)
+![Arquitetura do Fusca Azul](./arquitetura-fusca-azul.svg)
 
 
