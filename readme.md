@@ -41,3 +41,9 @@ O **Fusca Azul** é um aplicativo de estudo para aulas de microserviços, voltad
 
 3. **Separação entre backend e frontend**
 	- Backend e frontend devem ser implementados de forma separada.
+
+# Arquitetura do Fusca Azul
+
+![Arquitetura do Fusca Azul](./arquitetura-fusca-azul.png)
+
+

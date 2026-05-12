@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="920" viewBox="0 0 1500 920" role="img" aria-labelledby="title desc">
+  <title id="title">Arquitetura de Microservicos - Fusca Azul</title>
+  <desc id="desc">Diagrama de arquitetura com frontend separado do backend em microservicos, autenticacao JWT, ranking, soquinho, contestacao, denuncia e moderacao distribuida.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #f6f8fb; }
+      .title { font: 700 28px 'Segoe UI', Tahoma, sans-serif; fill: #0b1f3a; }
+      .subtitle { font: 500 14px 'Segoe UI', Tahoma, sans-serif; fill: #2d405f; }
+      .zone { fill: #ffffff; stroke: #b9c7de; stroke-width: 2; rx: 16; }
+      .zone-title { font: 700 18px 'Segoe UI', Tahoma, sans-serif; fill: #16325c; }
+      .component { fill: #eaf1ff; stroke: #4c78d0; stroke-width: 2; rx: 12; }
+      .component-alt { fill: #e9faf1; stroke: #2f9e62; stroke-width: 2; rx: 12; }
+      .component-db { fill: #fff4e8; stroke: #d37a22; stroke-width: 2; rx: 12; }
+      .component-queue { fill: #f7ecff; stroke: #8a49b8; stroke-width: 2; rx: 12; }
+      .label { font: 700 14px 'Segoe UI', Tahoma, sans-serif; fill: #10233f; }
+      .small { font: 500 12px 'Segoe UI', Tahoma, sans-serif; fill: #233b61; }
+      .edge { stroke: #2f4f7f; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .edge-event { stroke: #7b3fb1; stroke-width: 2; stroke-dasharray: 7 5; fill: none; marker-end: url(#arrowEvent); }
+      .legend { font: 600 12px 'Segoe UI', Tahoma, sans-serif; fill: #22395e; }
+      .note { fill: #fffde8; stroke: #d6bc3b; stroke-width: 1.5; rx: 8; }
+      .note-text { font: 600 12px 'Segoe UI', Tahoma, sans-serif; fill: #524200; }
+    </style>
+
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f4f7f" />
+    </marker>
+    <marker id="arrowEvent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7b3fb1" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1500" height="920" />
+
+  <text class="title" x="40" y="50">Fusca Azul - Arquitetura de Microservicos (Visao Geral)</text>
+  <text class="subtitle" x="40" y="78">Backend desacoplado, autenticacao JWT, eventos para denuncia/moderacao e regras de negocio de soquinho/ranking.</text>
+
+  <!-- Zonas -->
+  <rect class="zone" x="40" y="110" width="260" height="280" />
+  <text class="zone-title" x="58" y="138">Clientes</text>
+
+  <rect class="zone" x="330" y="110" width="260" height="280" />
+  <text class="zone-title" x="348" y="138">Frontend</text>
+
+  <rect class="zone" x="620" y="110" width="830" height="520" />
+  <text class="zone-title" x="638" y="138">Backend (Microservicos)</text>
+
+  <rect class="zone" x="620" y="650" width="830" height="230" />
+  <text class="zone-title" x="638" y="678">Dados e Integracoes</text>
+
+  <!-- Clientes -->
+  <rect class="component" x="70" y="170" width="200" height="70" />
+  <text class="label" x="90" y="198">Web Browser</text>
+  <text class="small" x="90" y="218">Aluno acessa app</text>
+
+  <rect class="component" x="70" y="260" width="200" height="70" />
+  <text class="label" x="90" y="288">App Mobile</text>
+  <text class="small" x="90" y="308">Captura foto + GPS</text>
+
+  <!-- Frontend -->
+  <rect class="component-alt" x="360" y="170" width="200" height="70" />
+  <text class="label" x="385" y="198">SPA Frontend</text>
+  <text class="small" x="385" y="218">UI React/Vue/Angular</text>
+
+  <rect class="component-alt" x="360" y="260" width="200" height="90" />
+  <text class="label" x="380" y="288">Auth Guard</text>
+  <text class="small" x="380" y="308">Armazena JWT</text>
+  <text class="small" x="380" y="326">Anexa token nas APIs</text>
+
+  <!-- Backend gateway + auth -->
+  <rect class="component" x="660" y="170" width="180" height="80" />
+  <text class="label" x="690" y="198">API Gateway</text>
+  <text class="small" x="690" y="218">Roteamento + rate limit</text>
+
+  <rect class="component" x="870" y="170" width="180" height="80" />
+  <text class="label" x="895" y="198">Auth Service</text>
+  <text class="small" x="895" y="218">Cadastro/Login + JWT</text>
+
+  <!-- Dominios -->
+  <rect class="component" x="1080" y="170" width="180" height="80" />
+  <text class="label" x="1105" y="198">User Service</text>
+  <text class="small" x="1105" y="218">Perfil e pontuacao</text>
+
+  <rect class="component" x="1290" y="170" width="130" height="80" />
+  <text class="label" x="1310" y="198">Ranking</text>
+  <text class="small" x="1302" y="218">Top usuarios</text>
+
+  <rect class="component" x="660" y="290" width="180" height="90" />
+  <text class="label" x="680" y="320">Photo Service</text>
+  <text class="small" x="680" y="340">Post foto fusca azul</text>
+  <text class="small" x="680" y="358">GPS obrigatorio</text>
+
+  <rect class="component" x="870" y="290" width="180" height="90" />
+  <text class="label" x="892" y="320">Soco Service</text>
+  <text class="small" x="892" y="340">Primeiro visualizador</text>
+  <text class="small" x="892" y="358">garante exclusividade</text>
+
+  <rect class="component" x="1080" y="290" width="180" height="90" />
+  <text class="label" x="1102" y="320">Contest Service</text>
+  <text class="small" x="1102" y="340">Contestacao de soco</text>
+  <text class="small" x="1102" y="358">abre disputa</text>
+
+  <rect class="component" x="1290" y="290" width="130" height="90" />
+  <text class="label" x="1304" y="320">Report</text>
+  <text class="small" x="1300" y="340">Denuncia</text>
+  <text class="small" x="1297" y="358">foto invalida</text>
+
+  <rect class="component" x="660" y="420" width="180" height="90" />
+  <text class="label" x="682" y="450">Moderation</text>
+  <text class="small" x="682" y="470">Notifica 3+ revisores</text>
+  <text class="small" x="682" y="488">maioria decide penalidade</text>
+
+  <rect class="component-queue" x="870" y="430" width="390" height="70" />
+  <text class="label" x="895" y="458">Event Bus (RabbitMQ/Kafka)</text>
+  <text class="small" x="895" y="478">Eventos de denuncia, revisao e atualizacao de ranking</text>
+
+  <!-- Dados -->
+  <rect class="component-db" x="660" y="710" width="220" height="120" />
+  <text class="label" x="690" y="740">PostgreSQL Cluster</text>
+  <text class="small" x="690" y="760">usuarios, fotos, socos,</text>
+  <text class="small" x="690" y="778">contestacoes, denuncias</text>
+
+  <rect class="component-db" x="910" y="710" width="220" height="120" />
+  <text class="label" x="950" y="740">Redis</text>
+  <text class="small" x="940" y="760">cache sessao/ranking</text>
+  <text class="small" x="940" y="778">locks de concorrencia</text>
+
+  <rect class="component-db" x="1160" y="710" width="260" height="120" />
+  <text class="label" x="1190" y="740">Object Storage</text>
+  <text class="small" x="1190" y="760">S3/MinIO para fotos</text>
+  <text class="small" x="1190" y="778">e evidencias de moderacao</text>
+
+  <!-- Notas de regra -->
+  <rect class="note" x="1090" y="530" width="330" height="78" />
+  <text class="note-text" x="1105" y="557">Regra critica:</text>
+  <text class="note-text" x="1105" y="577">Somente o primeiro a visualizar</text>
+  <text class="note-text" x="1105" y="595">a foto pode registrar soquinho.</text>
+
+  <!-- Fluxos principais -->
+  <path class="edge" d="M270 205 L360 205" />
+  <path class="edge" d="M270 295 L360 295" />
+  <path class="edge" d="M560 205 L660 205" />
+  <path class="edge" d="M840 205 L870 205" />
+  <path class="edge" d="M1050 205 L1080 205" />
+  <path class="edge" d="M1260 205 L1290 205" />
+
+  <path class="edge" d="M750 250 L750 290" />
+  <path class="edge" d="M960 250 L960 290" />
+  <path class="edge" d="M1170 250 L1170 290" />
+  <path class="edge" d="M1355 250 L1355 290" />
+
+  <path class="edge" d="M750 380 L750 420" />
+  <path class="edge" d="M1050 335 L1080 335" />
+
+  <path class="edge-event" d="M1355 380 L1355 430 L1260 430" />
+  <path class="edge-event" d="M1170 380 L1170 430" />
+  <path class="edge-event" d="M840 465 L870 465" />
+
+  <!-- Persistencia -->
+  <path class="edge" d="M750 510 L750 710" />
+  <path class="edge" d="M960 510 L960 710" />
+  <path class="edge" d="M1170 500 L1290 710" />
+  <path class="edge" d="M960 205 L960 710" />
+
+  <!-- Legenda -->
+  <rect class="zone" x="40" y="410" width="550" height="170" />
+  <text class="zone-title" x="58" y="438">Legenda</text>
+
+  <line class="edge" x1="70" y1="465" x2="160" y2="465" />
+  <text class="legend" x="175" y="470">Chamada sincrona HTTP/gRPC</text>
+
+  <line class="edge-event" x1="70" y1="500" x2="160" y2="500" />
+  <text class="legend" x="175" y="505">Evento assincrono (pub/sub)</text>
+
+  <rect class="component" x="70" y="520" width="140" height="38" />
+  <text class="legend" x="225" y="544">Microservico de dominio</text>
+
+  <rect class="component-db" x="370" y="520" width="140" height="38" />
+  <text class="legend" x="525" y="544">Persistencia/armazenamento</text>
+</svg>
