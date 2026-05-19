@@ -53,7 +53,7 @@ O diagrama apresenta uma arquitetura em camadas: clientes Web/Mobile consomem a 
 ### Pré-requisitos
 - Docker 24+ instalado
 - Docker Compose v2 instalado (`docker compose version`)
-- Portas livres na máquina: 5173, 8000, 8001, 5432, 5672, 6379, 8333, 8888, 9333, 15672
+- Portas livres na máquina: 5173, 8000, 8001, 5432, 5672, 6379, 8333, 8888, 9333, 15672, 27017
 
 ### 1. Validar a configuração
 ```bash
@@ -74,8 +74,11 @@ docker compose ps
 - SPA Frontend: http://localhost:5173
 - Kong (proxy): http://localhost:8000
 - Kong Admin API: http://localhost:8001
+- Health API (direto): http://localhost:3001/health
+- Health API (via Kong): http://localhost:8000/health-api/health
 - RabbitMQ Management: http://localhost:15672
 - Postgres: localhost:5432
+- MongoDB: localhost:27017
 - Redis: localhost:6379
 - SeaweedFS S3 API: http://localhost:8333
 - SeaweedFS UI/Filer: http://localhost:8888
@@ -83,6 +86,7 @@ docker compose ps
 
 ### 5. Credenciais padrão do ambiente (desenvolvimento)
 - Postgres: usuário `fusca`, senha `fusca123`, banco `fusca_azul`
+- MongoDB: usuário root `fusca`, senha `fusca123`, auth db `admin`
 - RabbitMQ: usuário `fusca`, senha `fusca123`
 - SeaweedFS S3: access key `fusca`, secret key `fusca123`
 

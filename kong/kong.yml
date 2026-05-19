@@ -1,9 +1,14 @@
 _format_version: "3.0"
 _transform: true
-
-# Configuracao inicial em modo DB-less.
-# Adicione services/routes dos microservicos aqui conforme forem criados.
-services: []
-routes: []
+services:
+  - name: health-api
+    url: http://health-api:3000
+    routes:
+      - name: health-api-route
+        paths:
+          - /health-api
+        strip_path: true
+        methods:
+          - GET
 consumers: []
 plugins: []

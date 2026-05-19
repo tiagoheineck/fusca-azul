@@ -1,0 +1,17 @@
+{
+  "name": "health-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Example health endpoint service",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "5.2.1"
+  }
+}
