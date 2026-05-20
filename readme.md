@@ -76,6 +76,10 @@ docker compose ps
 - Kong Admin API: http://localhost:8001
 - Health API (direto): http://localhost:3001/health
 - Health API (via Kong): http://localhost:8000/health-api/health
+- Location API (direto): http://localhost:3003/health
+- Location API (via Kong): http://localhost:8000/location-api/health
+- Location API Swagger UI (direto): http://localhost:3003/docs
+- Location API Swagger UI (via Kong): http://localhost:8000/location-api/docs
 - RabbitMQ Management: http://localhost:15672
 - Postgres: localhost:5432
 - MongoDB: localhost:27017
@@ -155,6 +159,62 @@ curl -i http://localhost:8000/health-api/health
 Observacoes:
 - O plugin `openid-connect` do Kong e Enterprise.
 - No Kong OSS (DB-less), o segredo JWT usado pelo `auth-api` (`APP_JWT_SECRET`) deve ser igual ao `secret` configurado em `kong/kong.yml` no `jwt_secrets`.
+
+## API de localizacao de fuscas (MongoDB)
+
+Servico: `location-api`
+
+Campos obrigatorios:
+- `geolocation`: GeoJSON Point no formato OpenStreetMap
+- `locatedBy`: usuario que localizou
+
+Exemplo de `geolocation`:
+```json
+{
+	"type": "Point",
+	"coordinates": [-48.548, -27.596]
+}
+```
+
+### Criar localizacao
+```bash
+curl -s -X POST http://localhost:8000/location-api/locations \
+	-H "Content-Type: application/json" \
+	-d '{
+		"geolocation": { "type": "Point", "coordinates": [-48.548, -27.596] },
+		"locatedBy": "joao"
+	}'
+```
+
+### Listar localizacoes
+```bash
+curl -s http://localhost:8000/location-api/locations
+```
+
+Filtrar por usuario:
+```bash
+curl -s "http://localhost:8000/location-api/locations?usuario=joao"
+```
+
+### Buscar por ID
+```bash
+curl -s http://localhost:8000/location-api/locations/ID_DA_LOCALIZACAO
+```
+
+### Atualizar por ID
+```bash
+curl -s -X PUT http://localhost:8000/location-api/locations/ID_DA_LOCALIZACAO \
+	-H "Content-Type: application/json" \
+	-d '{
+		"geolocation": { "type": "Point", "coordinates": [-48.55, -27.59] },
+		"locatedBy": "maria"
+	}'
+```
+
+### Excluir por ID
+```bash
+curl -i -X DELETE http://localhost:8000/location-api/locations/ID_DA_LOCALIZACAO
+```
 
 
 

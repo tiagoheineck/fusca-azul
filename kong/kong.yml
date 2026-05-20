@@ -30,6 +30,20 @@ services:
           claims_to_verify:
             - exp
 
+  - name: location-api
+    url: http://location-api:3003
+    routes:
+      - name: location-api-route
+        paths:
+          - /location-api
+        strip_path: true
+        methods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+
 consumers:
   - username: fusca-app-client
     jwt_secrets:

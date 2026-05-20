@@ -1,0 +1,19 @@
+{
+  "name": "location-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CRUD de localizacoes de fuscas com MongoDB",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "5.2.1",
+    "mongoose": "8.15.1",
+    "swagger-ui-express": "5.0.1"
+  }
+}

@@ -47,6 +47,33 @@ services:
       timeout: 10s
       retries: 5
 
+  location-api:
+    build:
+      context: ./services/location-api
+      dockerfile: Dockerfile
+    container_name: fusca-location-api
+    environment:
+      PORT: 3003
+      MONGO_URI: mongodb://fusca:fusca123@mongo:27017/fusca_azul?authSource=admin
+    ports:
+      - "3003:3003"
+    networks:
+      - fusca-net
+    depends_on:
+      mongo:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:3003/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   spa-frontend:
     image: nginx:1.27-alpine
     container_name: fusca-spa-frontend
