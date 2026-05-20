@@ -1,6 +1,18 @@
 _format_version: "3.0"
 _transform: true
 services:
+  - name: auth-api
+    url: http://auth-api:3002
+    routes:
+      - name: auth-api-route
+        paths:
+          - /auth-api
+        strip_path: true
+        methods:
+          - GET
+          - POST
+          - OPTIONS
+
   - name: health-api
     url: http://health-api:3000
     routes:
@@ -10,5 +22,18 @@ services:
         strip_path: true
         methods:
           - GET
-consumers: []
+    plugins:
+      - name: jwt
+        config:
+          key_claim_name: iss
+          claims_to_verify:
+            - exp
+
+consumers:
+  - username: fusca-app-client
+    jwt_secrets:
+      - key: fusca-app
+        algorithm: HS256
+        secret: change-me-in-production
+
 plugins: []

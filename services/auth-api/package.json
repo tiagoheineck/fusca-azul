@@ -1,0 +1,19 @@
+{
+  "name": "auth-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Google login exchange and app JWT issuer",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "5.2.1",
+    "google-auth-library": "9.15.1",
+    "jsonwebtoken": "9.0.2"
+  }
+}

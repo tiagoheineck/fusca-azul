@@ -105,6 +105,52 @@ docker compose down
 docker compose down -v
 ```
 
+## Configurar login Google com Kong OSS (JWT)
+
+Sem Kong Enterprise, o fluxo recomendado e:
+1. Usuario autentica no Google.
+2. `auth-api` troca o `code` do Google e emite um JWT proprio da aplicacao.
+3. Kong valida esse JWT com o plugin `jwt` nas rotas protegidas.
+
+### 1. Defina as variaveis de ambiente
+Use o arquivo `.env.google.example` como base e crie um `.env.google` com os valores reais.
+
+### 2. Suba os servicos relevantes
+```bash
+docker compose up -d --build auth-api api-gateway health-api
+```
+
+### 3. Gere a URL de login Google
+```bash
+curl -s "http://localhost:8000/auth-api/google/url?redirect_uri=http://localhost:5173/auth/callback"
+```
+
+### 4. Troque o `code` por JWT da aplicacao
+Depois de autenticar no Google, pegue o `code` retornado no redirect e execute:
+```bash
+curl -s -X POST http://localhost:8000/auth-api/google/exchange \
+	-H "Content-Type: application/json" \
+	-d '{
+		"code": "SEU_GOOGLE_AUTH_CODE",
+		"redirectUri": "http://localhost:5173/auth/callback"
+	}'
+```
+
+### 5. Use o JWT nas rotas protegidas do Kong
+```bash
+curl -i http://localhost:8000/health-api/health \
+	-H "Authorization: Bearer SEU_APP_ACCESS_TOKEN"
+```
+
+Teste sem token (deve retornar `401`):
+```bash
+curl -i http://localhost:8000/health-api/health
+```
+
+Observacoes:
+- O plugin `openid-connect` do Kong e Enterprise.
+- No Kong OSS (DB-less), o segredo JWT usado pelo `auth-api` (`APP_JWT_SECRET`) deve ser igual ao `secret` configurado em `kong/kong.yml` no `jwt_secrets`.
+
 
 
 

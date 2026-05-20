@@ -22,6 +22,31 @@ services:
       timeout: 10s
       retries: 5
 
+  auth-api:
+    build:
+      context: ./services/auth-api
+      dockerfile: Dockerfile
+    container_name: fusca-auth-api
+    env_file:
+      - ./.env.google
+    environment:
+      PORT: 3002
+    ports:
+      - "3002:3002"
+    networks:
+      - fusca-net
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:3002/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   spa-frontend:
     image: nginx:1.27-alpine
     container_name: fusca-spa-frontend
@@ -41,6 +66,7 @@ services:
     environment:
       KONG_DATABASE: "off"
       KONG_DECLARATIVE_CONFIG: /opt/kong/kong.yml
+      KONG_PLUGINS: bundled
       KONG_PROXY_ACCESS_LOG: /dev/stdout
       KONG_ADMIN_ACCESS_LOG: /dev/stdout
       KONG_PROXY_ERROR_LOG: /dev/stderr
