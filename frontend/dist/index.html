@@ -3,37 +3,301 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fusca Azul SPA</title>
+    <title>Fusca Azul</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
     <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6efe4;
+        --card: rgba(255, 251, 245, 0.88);
+        --card-strong: #fffdf8;
+        --ink: #1f2a22;
+        --muted: #5b665d;
+        --accent: #0f7a4f;
+        --accent-2: #e9a93d;
+        --danger: #b33b2e;
+        --line: rgba(31, 42, 34, 0.08);
+        --shadow: 0 24px 80px rgba(88, 67, 34, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
-        font-family: Arial, sans-serif;
+        font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
         min-height: 100vh;
+        background:
+          radial-gradient(circle at top left, rgba(15, 122, 79, 0.18), transparent 28%),
+          radial-gradient(circle at right 20%, rgba(233, 169, 61, 0.18), transparent 22%),
+          linear-gradient(160deg, #f7f0e4 0%, #eef7ef 52%, #f8fafb 100%);
+        color: var(--ink);
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: auto;
+        width: 28rem;
+        height: 28rem;
+        border-radius: 999px;
+        filter: blur(24px);
+        opacity: 0.28;
+        pointer-events: none;
+      }
+
+      body::before {
+        background: rgba(15, 122, 79, 0.2);
+        top: -8rem;
+        right: -6rem;
+      }
+
+      body::after {
+        background: rgba(233, 169, 61, 0.18);
+        bottom: -10rem;
+        left: -8rem;
+      }
+
+      #app {
+        min-height: 100vh;
+      }
+
+      .shell {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0 48px;
+      }
+
+      .hero {
         display: grid;
-        place-items: center;
-        background: linear-gradient(120deg, #dce8ff, #f8fbff);
-        color: #1d2d44;
+        grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+        gap: 24px;
+        align-items: stretch;
       }
-      main {
-        text-align: center;
-        background: #ffffff;
-        padding: 24px 28px;
-        border-radius: 12px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+      .panel {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
       }
+
+      .panel-main {
+        padding: 36px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(15, 122, 79, 0.08);
+        color: var(--accent);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2 {
+        font-family: "Fraunces", Georgia, serif;
+        letter-spacing: -0.03em;
+      }
+
       h1 {
-        margin: 0 0 10px;
-        font-size: 1.5rem;
+        margin: 18px 0 14px;
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        line-height: 0.92;
       }
+
       p {
         margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .lead {
+        max-width: 54ch;
+        font-size: 1.05rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .button {
+        appearance: none;
+        border: 0;
+        border-radius: 16px;
+        padding: 14px 18px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+      }
+
+      .button:disabled {
+        cursor: wait;
+        opacity: 0.7;
+      }
+
+      .button-primary {
+        color: white;
+        background: linear-gradient(135deg, #0f7a4f, #149360);
+        box-shadow: 0 16px 32px rgba(15, 122, 79, 0.28);
+      }
+
+      .button-secondary {
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(31, 42, 34, 0.08);
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .stat {
+        padding: 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(31, 42, 34, 0.08);
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.4rem;
+        margin-bottom: 4px;
+      }
+
+      .panel-side {
+        padding: 28px;
+        display: grid;
+        gap: 18px;
+        align-content: start;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 250, 242, 0.92)),
+          linear-gradient(160deg, rgba(233, 169, 61, 0.15), rgba(15, 122, 79, 0.15));
+      }
+
+      .pill-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .pill {
+        padding: 10px 12px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        background: var(--card-strong);
+        border: 1px solid var(--line);
+      }
+
+      .status,
+      .result,
+      .user-card {
+        border-radius: 22px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.74);
+      }
+
+      .status strong,
+      .result strong,
+      .user-card strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .status-error {
+        color: var(--danger);
+        border-color: rgba(179, 59, 46, 0.18);
+        background: rgba(255, 243, 241, 0.9);
+      }
+
+      .dashboard {
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 340px;
+        gap: 24px;
+      }
+
+      .user-card img {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 12px;
+        background: rgba(15, 122, 79, 0.08);
+      }
+
+      .muted-list {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .muted-list span {
+        color: var(--muted);
+        font-size: 0.94rem;
+        word-break: break-word;
+      }
+
+      pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 0.9rem;
+        color: #173321;
+      }
+
+      .callback-note {
+        margin-top: 18px;
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .dashboard {
+          grid-template-columns: 1fr;
+        }
+
+        .panel-main,
+        .panel-side {
+          padding: 24px;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>Fusca Azul</h1>
-      <p>Infraestrutura base ativa. Substitua este build pela SPA oficial.</p>
-    </main>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="/app.js?v=20260520"></script>
   </body>
 </html>

@@ -22,6 +22,7 @@ services:
         strip_path: true
         methods:
           - GET
+          - OPTIONS
     plugins:
       - name: jwt
         config:
@@ -36,4 +37,19 @@ consumers:
         algorithm: HS256
         secret: change-me-in-production
 
-plugins: []
+plugins:
+  - name: cors
+    config:
+      origins:
+        - http://localhost:5173
+      methods:
+        - GET
+        - POST
+        - OPTIONS
+      headers:
+        - Accept
+        - Authorization
+        - Content-Type
+      exposed_headers:
+        - Content-Length
+      max_age: 3600

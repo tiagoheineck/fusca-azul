@@ -120,12 +120,17 @@ Use o arquivo `.env.google.example` como base e crie um `.env.google` com os val
 docker compose up -d --build auth-api api-gateway health-api
 ```
 
-### 3. Gere a URL de login Google
+### 3. Abra a SPA
+- Acesse `http://localhost:5173`
+- Clique em `Entrar com Google`
+- A SPA chama `auth-api/google/url`, redireciona para o Google e processa automaticamente o retorno em `http://localhost:5173/auth/callback`
+
+### 4. Gere a URL de login Google manualmente
 ```bash
 curl -s "http://localhost:8000/auth-api/google/url?redirect_uri=http://localhost:5173/auth/callback"
 ```
 
-### 4. Troque o `code` por JWT da aplicacao
+### 5. Troque o `code` por JWT da aplicacao
 Depois de autenticar no Google, pegue o `code` retornado no redirect e execute:
 ```bash
 curl -s -X POST http://localhost:8000/auth-api/google/exchange \
@@ -136,7 +141,7 @@ curl -s -X POST http://localhost:8000/auth-api/google/exchange \
 	}'
 ```
 
-### 5. Use o JWT nas rotas protegidas do Kong
+### 6. Use o JWT nas rotas protegidas do Kong
 ```bash
 curl -i http://localhost:8000/health-api/health \
 	-H "Authorization: Bearer SEU_APP_ACCESS_TOKEN"

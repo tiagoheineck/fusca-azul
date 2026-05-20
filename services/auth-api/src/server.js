@@ -107,8 +107,10 @@ app.post("/google/exchange", async (req, res) => {
     const tokenData = await tokenResponse.json();
 
     if (!tokenResponse.ok) {
+      const googleError = [tokenData.error, tokenData.error_description].filter(Boolean).join(" - ");
       res.status(400).json({
         error: "google_token_exchange_failed",
+        message: googleError || "Google rejected the token exchange request",
         details: tokenData,
       });
       return;
