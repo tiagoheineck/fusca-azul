@@ -1,0 +1,71 @@
+name: Build Containers
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    name: Build ${{ matrix.component.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        component:
+          - name: health-api
+            context: ./services/health-api
+            dockerfile: ./services/health-api/Dockerfile
+            image: health-api
+          - name: auth-api
+            context: ./services/auth-api
+            dockerfile: ./services/auth-api/Dockerfile
+            image: auth-api
+          - name: location-api
+            context: ./services/location-api
+            dockerfile: ./services/location-api/Dockerfile
+            image: location-api
+          - name: spa-frontend
+            context: ./frontend
+            dockerfile: ./frontend/Dockerfile
+            image: spa-frontend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/fusca-azul-${{ matrix.component.image }}
+          tags: |
+            type=sha,prefix=ci-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.component.context }}
+          file: ${{ matrix.component.dockerfile }}
+          push: ${{ github.event_name != 'pull_request' }}
+          provenance: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
