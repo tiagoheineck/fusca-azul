@@ -1,8 +1,8 @@
 {
-  "name": "location-api",
+  "name": "notification-api",
   "version": "1.0.0",
   "private": true,
-  "description": "CRUD de localizacoes de fuscas com MongoDB",
+  "description": "Consumidor RabbitMQ - processa eventos de localizacao de fuscas",
   "main": "src/server.js",
   "type": "commonjs",
   "engines": {
@@ -13,8 +13,6 @@
   },
   "dependencies": {
     "amqplib": "0.10.7",
-    "express": "5.2.1",
-    "mongoose": "8.15.1",
-    "swagger-ui-express": "5.0.1"
+    "express": "5.2.1"
   }
 }

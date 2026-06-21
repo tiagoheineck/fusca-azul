@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const amqplib = require("amqplib");
 const swaggerUi = require("swagger-ui-express");
 
 const app = express();
@@ -9,6 +10,28 @@ const port = Number(process.env.PORT || 3003);
 const mongoUri =
   process.env.MONGO_URI ||
   "mongodb://fusca:fusca123@mongo:27017/fusca_azul?authSource=admin";
+const rabbitUrl =
+  process.env.RABBITMQ_URL || "amqp://fusca:fusca123@rabbitmq:5672";
+const EXCHANGE = "fusca_events";
+
+let rabbitChannel = null;
+
+async function connectRabbit() {
+  const conn = await amqplib.connect(rabbitUrl);
+  rabbitChannel = await conn.createChannel();
+  await rabbitChannel.assertExchange(EXCHANGE, "topic", { durable: true });
+  console.log("location-api connected to RabbitMQ");
+}
+
+function publishEvent(routingKey, payload) {
+  if (!rabbitChannel) return;
+  rabbitChannel.publish(
+    EXCHANGE,
+    routingKey,
+    Buffer.from(JSON.stringify(payload)),
+    { persistent: true, contentType: "application/json" },
+  );
+}
 
 const locationSchema = new mongoose.Schema(
   {
@@ -348,7 +371,15 @@ app.post("/locations", async (req, res) => {
   try {
     const payload = parsePayload(req.body);
     const created = await FuscaLocation.create(payload);
-    res.status(201).json(mapDocument(created));
+    const doc = mapDocument(created);
+
+    publishEvent("fusca.location.created", {
+      event: "fusca.location.created",
+      timestamp: new Date().toISOString(),
+      data: doc,
+    });
+
+    res.status(201).json(doc);
   } catch (error) {
     if (error.name === "ValidationError") {
       res.status(400).json({
@@ -482,6 +513,7 @@ app.delete("/locations/:id", async (req, res) => {
 async function start() {
   try {
     await mongoose.connect(mongoUri);
+    await connectRabbit();
     app.listen(port, () => {
       console.log(`location-api running on port ${port}`);
     });
