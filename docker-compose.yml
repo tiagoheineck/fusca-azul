@@ -138,6 +138,8 @@ services:
       - "8444:8444"
     volumes:
       - ./kong/kong.yml:/opt/kong/kong.yml:ro
+    tmpfs:
+      - /usr/local/kong/sockets
     networks:
       - fusca-net
     healthcheck:
