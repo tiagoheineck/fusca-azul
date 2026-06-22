@@ -1,0 +1,393 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f3f7ff;
+}
+
+.menu{
+    position: fixed;
+    left: -320px;
+    top: 0;
+    width: 320px;
+    height: 100vh;
+    background: white;
+    transition: .3s;
+    z-index: 99999;
+}
+
+.menu.aberta{
+    left: 0;
+}
+
+.menu.ativo{
+    left:0;
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:#1f2c5c;
+    margin:25px 0;
+    font-size:18px;
+}
+
+.menu a img{
+    width:24px;
+    height:24px;
+    margin-left: 10px;
+}
+
+.logo{
+      display: flex;  
+}
+
+.menu-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img{
+    width: 50px;
+    height: 50px;
+}
+
+.logo p{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.fecharMenu{
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #1f3faa;
+}
+
+
+.content{
+    padding:40px 60px;
+}
+
+
+.menu-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+.menu-btn img{
+    width:30px;
+}
+
+.fusca-page {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 30px;
+}
+
+.header-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.icon{
+    width: 40px;
+    margin-bottom: 8px;
+}
+
+.header-page h1 {
+    font-size: 60px;
+    color: #1f3faa;
+    line-height: 65px;
+    margin-bottom: 20px;
+}
+
+.header-page p {
+    color: #5c6477;
+    font-size: 22px;
+}
+
+.header-page img {
+    width: 320px;
+}
+
+.card-lista {
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,.08);
+}
+
+
+.top-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px;
+    border-bottom: 1px solid #ececec;
+}
+
+.top-lista h2 {
+    color: #15204d;
+    margin-bottom: 5px;
+}
+
+.top-lista p {
+    color: #7c8398;
+}
+
+.top-lista input {
+    width: 350px;
+    height: 50px;
+    border: 1px solid #dfe3ef;
+    border-radius: 15px;
+    padding: 0 20px;
+    font-size: 16px;
+    outline: none;
+}
+
+.item-fusca{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:12px;
+    padding:15px;
+}
+
+.item-fusca:hover {
+    background: #fafcff;
+}
+
+.foto{
+    width:90px;
+    height:90px;
+    border-radius:12px;
+    flex-shrink:0;
+}
+
+.infos {
+    flex: 1;
+}
+
+.infos h3 {
+    color: #16245f;
+    font-size: 26px;
+    margin-bottom: 12px;
+}
+
+.local,
+.tempo {
+    display: block;
+    color: #677086;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.btn-soquinho {
+    background: #2451ff;
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    border-radius: 16px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-soquinho:hover {
+    background: #163ee4;
+    transform: scale(1.03);
+}
+
+.status {
+    background: #f1f2f4;
+    color: #5e6472;
+    padding: 18px 30px;
+    border-radius: 16px;
+    font-size: 18px;
+}
+
+@media (max-width:768px){
+
+    h1{
+        text-align: left;
+    }
+
+    .content{
+        padding:15px 10px;
+    }
+
+    .fusca-page{
+        margin:15px auto;
+        padding:0;
+    }
+
+    .header-page{
+        text-align:center;
+        margin-bottom:20px;
+    }
+
+    .header-page h1{
+        font-size:32px;
+        line-height:38px;
+        margin-bottom:10px;
+    }
+
+    .header-page p{
+        font-size:15px;
+        line-height:22px;
+    }
+
+
+    .card-lista{
+        border-radius:20px;
+        margin-bottom: 20%;
+    }
+
+
+    .top-lista{
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:15px;
+        padding:15px;
+    }
+
+    .top-lista h2{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        font-size:22px;
+        margin-bottom:5px;
+    }
+
+    .top-lista p{
+        font-size:14px;
+        margin:0;
+    }
+
+    .icon{
+        width:24px;
+        height:24px;
+        margin:0;
+    }
+
+    .top-lista input{
+        width:100%;
+        height:45px;
+        font-size:14px;
+    }
+
+    .item-fusca{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        padding:10px;
+    }
+
+    .foto{
+        width:100%;
+        max-width:240px;
+        height:140px;
+        object-fit:cover;
+        border-radius:15px;
+        margin:0 0 12px 0;
+    }
+
+    .infos{
+        width:100%;
+    }
+
+    .infos h3{
+        font-size:20px;
+        margin-bottom:8px;
+    }
+
+    .local,
+    .tempo{
+        font-size:14px;
+        margin-bottom:5px;
+    }
+
+    .btn-soquinho{
+        width:100%;
+        max-width:220px;
+        margin-top:10px;
+        padding:12px;
+        font-size:14px;
+        border-radius:12px;
+    }
+
+    .status{
+        width:100%;
+        max-width:220px;
+        margin-top:10px;
+        padding:12px;
+        font-size:14px;
+        border-radius:12px;
+    }
+
+    .menu{
+        width:280px;
+        left:-280px;
+    }
+
+
+    footer p{
+        text-align:center;
+        font-size:10px;
+        padding:5px;
+        margin:0;
+    }
+}
+
+@media (max-width:480px){
+
+    .header-page h1{
+        font-size:26px;
+        line-height:32px;
+    }
+
+    .header-page p{
+        font-size:14px;
+    }
+
+    .top-lista h2{
+        font-size:18px;
+    }
+
+    .infos h3{
+        font-size:18px;
+    }
+
+    .foto{
+        max-width:200px;
+        height:120px;
+    }
+
+    .btn-soquinho,
+    .status{
+        font-size:13px;
+        padding:10px;
+    }
+}

@@ -1,0 +1,607 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f3f7ff;
+}
+
+.menu{
+    position: fixed;
+    left: -320px;
+    top: 0;
+    width: 320px;
+    height: 100vh;
+    background: white;
+    transition: .3s;
+    z-index: 99999;
+}
+
+.menu.aberta{
+    left: 0;
+}
+
+.menu.ativo{
+    left:0;
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:#1f2c5c;
+    margin:25px 0;
+    font-size:18px;
+}
+
+.menu a img{
+    width:24px;
+    height:24px;
+    margin-left: 10px;
+}
+
+.logo{
+      display: flex;  
+}
+
+.menu-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img{
+    width: 50px;
+    height: 50px;
+}
+
+.logo p{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.fecharMenu{
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #1f3faa;
+}
+
+
+.content{
+    padding:40px 60px;
+}
+
+
+.menu-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+.menu-btn img{
+    width:30px;
+}
+
+.topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom: -70px;
+}
+
+.usuario h1{
+    color:#173b8d;
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.usuario p{
+    margin-bottom:10px;
+}
+
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.soquinhos{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:white;
+    padding:15px 20px;
+    border-radius:15px;
+}
+
+.soquinhos img{
+    width:28px;
+    height:28px;
+}
+
+.notificacao img{
+    width:28px;
+    height:28px;
+}
+
+.avatar{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+}
+
+.ranking-page{
+    padding:40px;
+}
+
+.ranking-container{
+    display:grid;
+    grid-template-columns: 1fr 350px;
+    gap:30px;
+}
+
+.titulo{
+    color: #173b8d;
+}
+
+.titulo img{
+    width:50px;
+}
+
+.titulo h1{
+    color:#10235f;
+    font-size:40px;
+}
+
+.tabs{
+    display:flex;
+    gap:40px;
+    border-bottom:1px solid #dfe4f2;
+    margin-bottom:25px;
+}
+
+.tabs button{
+    border:none;
+    background:none;
+    padding:15px 0;
+    cursor:pointer;
+    color:#65719a;
+    font-size:18px;
+}
+
+.tabs .active{
+    color:#2563eb;
+    border-bottom:3px solid #2563eb;
+}
+
+.info-box{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:5px;
+}
+
+.info-box img{
+    width:45px;
+}
+
+.info-box p{
+    font-weight:600;
+    color:#10235f;
+}
+
+.info-box span{
+    color:#65719a;
+}
+
+.ranking-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.ranking-header{
+    display:grid;
+    grid-template-columns:100px 1fr 180px;
+    padding:20px;
+    border-bottom:1px solid #e6ebf5;
+    font-weight:600;
+    color:#65719a;
+}
+
+.ranking-item{
+    display:grid;
+    grid-template-columns:100px 1fr 180px;
+    align-items:center;
+    padding:15px 20px;
+    border-bottom:1px solid #edf1f8;
+}
+
+.destaque{
+    background:#eef4ff;
+}
+
+.posicao{
+    display:flex;
+    align-items:center;
+}
+
+.posicao img{
+    width:45px;
+}
+
+.numero{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#cfe0ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.jogador{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.jogador img{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+}
+
+.jogador div{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.jogador strong{
+    color:#10235f;
+}
+
+.jogador span{
+    color:#65719a;
+}
+
+.pontos{
+    text-align:right;
+    font-size:28px;
+    font-weight:bold;
+    color:#10235f;
+}
+
+.load-more{
+    padding:25px;
+    text-align:center;
+}
+
+.load-more button{
+    border:1px solid #2563eb;
+    background:white;
+    color:#2563eb;
+    padding:12px 30px;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.ranking-side{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    margin-top: 150px;
+}
+
+.card-side{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom: 10px;
+}
+
+.card-side h3{
+    margin-bottom:20px;
+    color:#10235f;
+}
+
+.card-side2{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom: 45px;
+}
+
+.card-side2 h3{
+    margin-bottom:20px;
+    color:#10235f;
+}
+
+.desempenho{
+    background:#f5f7fc;
+    border-radius:16px;
+    text-align:center;
+    padding:25px;
+}
+
+.desempenho h2{
+    color:#2563eb;
+    font-size:40px;
+}
+
+.desempenho img{
+    width:120px;
+    margin-top:15px;
+}
+
+.stats{
+    display:flex;
+    justify-content:space-between;
+    margin:20px 0;
+}
+
+.stats div{
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+}
+
+.stats strong{
+    font-size:28px;
+    color:#10235f;
+}
+
+.stats span{
+    color:#65719a;
+    font-size:14px;
+}
+
+.premio{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    background:#f5f7fc;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:10px;
+}
+
+.premio img{
+    width:40px;
+}
+
+.premio div{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.btn-outline{
+    width:100%;
+    padding:12px;
+    border:1px solid #2563eb;
+    background:white;
+    color:#2563eb;
+    border-radius:12px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+@media (max-width: 768px){
+
+    .usuario h1{
+        font-size:20px;
+    }
+
+    .top-right{
+        height: 20px;
+        gap:15px;
+    }
+
+    .soquinhos{
+        padding:5px;
+        border-radius:12px;
+    }
+
+    .titulo{
+        margin-top: 60px;
+    }
+
+    .soquinhos img{
+        width: 22px;
+        height: 22px;
+    }
+
+    .soquinhos strong{
+        font-size:15px;
+    }
+
+    .soquinhos p{
+        font-size:10px;
+    }
+
+    .notificacao img{
+        width: 15px;
+        height: 15px;
+    }
+
+    .avatar{
+        width: 22px;
+        height: 22px;
+    }
+
+    .content{
+        padding: 15px;
+    }
+
+    .ranking-page{
+        padding: 10px;
+    }
+
+    .ranking-container{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .ranking-side{
+        margin-top: 0;
+        width: 100%;
+    }
+
+    .titulo{
+        justify-content: center;
+    }
+
+    .titulo h1{
+        font-size: 42px;
+    }
+
+    .tabs{
+        gap: 25px;
+
+    }
+
+    .tabs button{
+        font-size: 15px;
+    }
+
+    .info-box{
+        text-align: center;
+        padding: 20px;
+    }
+
+    .info-box img{
+        display: none;
+    }
+
+    .ranking-header{
+        display: grid;
+        grid-template-columns: 50px 1fr 80px;
+        padding: 15px 10px;
+        font-size: 10px;
+    }
+
+    .ranking-item{
+        display: grid;
+        grid-template-columns: 50px 1fr 80px;
+        align-items: center;
+        gap: 10px;
+        padding: 5px;
+    }
+
+    .posicao img{
+        width: 25px;
+    }
+
+    .numero{
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .jogador{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .jogador img{
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0;
+    }
+
+    .jogador strong{
+        font-size: 10px;
+        display: block;
+    }
+
+    .pontos{
+        font-size: 14px;
+        text-align: right;
+        margin-right: 40px;
+    }
+
+    .stats{
+        flex-direction: column;
+        gap: 15px;    }
+
+    .desempenho h2{
+        font-size: 20px;
+    }
+
+    .desempenho{
+        padding: 5px;
+    }
+
+    .stats strong{
+        font-size: 15px;
+    }
+
+    .load-more button{
+        width: 112%;
+        margin-left: -13px;
+    }
+
+    .premio{
+        padding: 10px;
+    }
+
+    .premio img{
+        width: 30px;
+    }
+    
+    .premio strong{
+        font-size: 15px;
+    }
+
+    .premio span{
+        margin-top: -5px;
+        font-size: 15px;
+    }
+
+    .btn-outline{
+        width: 100%;
+        justify-content: center;
+    }
+
+    footer p{
+        font-size: 10px;
+    }
+
+    .card-side{
+        padding: 10px;
+    }
+
+    .card-side2{
+        padding: 10px;
+        margin-bottom: 20%;
+    }
+
+    .card-side2 h3{
+        font-size: 20px;
+    }
+}

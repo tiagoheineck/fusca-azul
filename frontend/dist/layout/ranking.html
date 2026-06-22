@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="ranking.css">
+    <link rel="stylesheet" href="all.css">
+    <title>Fusca Azul</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand bg-body-tertiary">
+        <div class="container-fluid">
+            <img src="img/fusca2.png" class="img">
+            <a class="navbar-brand h1" href="inicio.html">Fusca Azul</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            </div>
+        </div>
+    </nav>
+
+    <aside id="menu" class="menu">
+        <div class="menu-topo">
+            <div class="logo">
+                <img src="img/fusca2.png" alt="">
+                <span>Fusca Azul</span>
+            </div>
+
+            <button class="btn" id="fecharMenu"><img src="img/excluir.png" alt=""></button>
+        </div>
+
+        <a href="inicio.html"><img src="img/casa.png"> Início</a>
+        <a href="foto.html"><img src="img/camera.png"> Postar Foto</a>
+        <a href="ranking.html"><img src="img/ranking.png"> Ranking</a>
+        <a href="socar.html"><img src="img/soco.png">Soquinhos</a>
+        <a href="denuncia.html"><img src="img/bandeiras.png"> Denunciar</a>
+        <a href="contestar.html"><img src="img/balao-de-fala.png"> Contestar</a>
+    </aside>
+
+    <main class="content">
+        <button class="menu-btn" onclick="toggleMenu()">
+            <img src="img/menu-aberto.png">
+        </button>
+
+        <section class="topo">
+
+            <div class="usuario">
+                <h1>Olá, João!</h1>
+            </div>
+
+            <div class="top-right">
+                <div class="soquinhos">
+                    <img src="img/soco.png">
+                    <div>
+                        <strong>2450</strong>
+                        <p>Soquinhos</p>
+                    </div>
+                </div>
+
+                <div class="notificacao">
+                    <img src="img/notificacao.png">
+                </div>
+                <img class="avatar" src="img/avatar.png">
+            </div>
+        </section>
+    </main>
+
+    <div class="ranking-page">
+        <div class="ranking-container">
+            <div class="ranking-main">
+                <div>
+                    <h1 class="titulo">Ranking</h1>
+                </div>
+                <div class="tabs">
+                    <button class="active">Geral</button>
+                    <button>Semanal</button>
+                </div>
+                <div class="info-box">
+                    <img src="img/grupo.png" alt="">
+                    <div>
+                        <p>
+                            O ranking geral considera todos os soquinhos dos jogadores.
+                        </p>
+                        <span>
+                            Continue participando e suba posições!
+                        </span>
+                    </div>
+                </div>
+
+                <div class="ranking-card">
+                    <div class="ranking-header">
+                        <span>Posição</span>
+                        <span>Jogador</span>
+                        <span>Soquinhos</span>
+                    </div>
+
+                    <div class="ranking-item">
+                        <div class="posicao">
+                            <img src="img/1.png">
+                        </div>
+
+                        <div class="jogador">
+                            <img src="img/avatar.png">
+                            <div>
+                                <strong>Mariana Costa</strong>
+                            </div>
+                        </div>
+                        <div class="pontos">6.820</div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="posicao">
+                            <img src="img/2.png">
+                        </div>
+
+                        <div class="jogador">
+                            <img src="img/avatar.png">
+                            <div>
+                                <strong>Lucas Ferreira</strong>
+                            </div>
+                        </div>
+                        <div class="pontos">5.210</div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="posicao">
+                            <img src="img/3.png">
+                        </div>
+
+                        <div class="jogador">
+                            <img src="img/avatar.png">
+                            <div>
+                                <strong>Fernanda Lima</strong>
+                            </div>
+                        </div>
+                        <div class="pontos">4.760</div>
+                    </div>
+
+                    <div class="ranking-item destaque">
+                        <div class="posicao numero">5</div>
+                        <div class="jogador">
+                            <img src="img/avatar.png">
+                            <div>
+                                <strong>João Silva (você)</strong>
+                            </div>
+                        </div>
+                        <div class="pontos">2.450</div>
+                    </div>
+                    <div class="load-more">
+                        <button>Carregar mais</button>
+                    </div>
+                </div>
+            </div>
+            <aside class="ranking-side">
+                <div class="card-side">
+                    <h3>Seu desempenho</h3>
+                    <div class="desempenho">
+                        <h2>5º lugar</h2>
+                        <img src="img/socogrande.png" class="img">
+                    </div>
+                    <div class="stats">
+                        <div>
+                            <strong>3.250</strong>
+                            <span>soquinhos recebidos</span>
+                        </div>
+                        <div>
+                            <strong>2.450</strong>
+                            <span>soquinhos dados</span>
+                        </div>
+                    </div>
+                    <button class="btn-outline">
+                        Ver meu perfil
+                    </button>
+                </div>
+
+                <div class="card-side2">
+                    <h3>Recompensas do ranking</h3>
+                    <div class="premio">
+                        <img src="img/1.png">
+                        <div>
+                            <strong>1º lugar</strong>
+                            <span>Troféu Ouro</span>
+                        </div>
+                    </div>
+
+                    <div class="premio">
+                        <img src="img/2.png">
+                        <div>
+                            <strong>2º lugar</strong>
+                            <span>Troféu Prata</span>
+                        </div>
+                    </div>
+
+                    <div class="premio">
+                        <img src="img/3.png">
+                        <div>
+                            <strong>3º lugar</strong>
+                            <span>Troféu Bronze</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+    <footer class="d-flex fixed-bottom bg-body-tertiary">
+        <p class="p"><strong>Jogo - Fusca Azul <br> Projeto desenvolvido na <a
+                    href="https://fsw-ifc.brdrive.net/">Fábrica de software</a></strong></p>
+    </footer>
+</body>

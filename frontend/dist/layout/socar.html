@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="socar.css">
+    <link rel="stylesheet" href="all.css">
+    <title>Fusca Azul</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand bg-body-tertiary">
+        <div class="container-fluid">
+            <img src="img/fusca2.png" class="img">
+            <a class="navbar-brand h1" href="inicio.html">Fusca Azul</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            </div>
+        </div>
+    </nav>
+
+    <aside id="menu" class="menu">
+        <div class="menu-topo">
+            <div class="logo">
+                <img src="img/fusca2.png" alt="">
+                <span>Fusca Azul</span>
+            </div>
+
+            <button class="btn" id="fecharMenu"><img src="img/excluir.png" alt=""></button>
+        </div>
+
+        <a href="inicio.html"><img src="img/casa.png"> Início</a>
+        <a href="foto.html"><img src="img/camera.png"> Postar Foto</a>
+        <a href="ranking.html"><img src="img/ranking.png"> Ranking</a>
+        <a href="socar.html"><img src="img/soco.png">Soquinhos</a>
+        <a href="denuncia.html"><img src="img/bandeiras.png"> Denunciar</a>
+        <a href="contestar.html"><img src="img/balao-de-fala.png"> Contestar</a>
+    </aside>
+
+    <main class="content">
+        <button class="menu-btn" onclick="toggleMenu()">
+            <img src="img/menu-aberto.png">
+        </button>
+
+
+        <section class="fusca-page">
+
+            <div class="header-page">
+                <div>
+                    <h1>Encontre um<br>Fusca Azul</h1>
+                    <p>
+                        Seja o primeiro a visualizar a foto e ganhe um soquinho!
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-lista">
+                <div class="top-lista">
+                    <div>
+                        <h2><img src="img/camera.png" class="icon" alt="">Fotos de Fuscas Azuis</h2>
+                        <p>Veja as fotos mais recentes e dê o primeiro soquinho.</p>
+                    </div>
+
+                    <input type="text" placeholder="Buscar por local ou usuário...">
+                </div>
+                <div class="item-fusca">
+
+                    <img class="foto" src="img/fuscaimg1.jpeg" alt="">
+
+                    <div class="infos">
+
+                        <h3>João Ferreira</h3>
+
+                        <span class="local">📍 Praia de Icaraí, Niterói - RJ</span>
+
+                        <span class="tempo">🕒 Postado há 3 minutos
+                        </span>
+
+                    </div>
+
+                    <button class="btn-soquinho">👊 Dar Soquinho
+                    </button>
+
+                </div>
+                <div class="item-fusca">
+                    <img class="foto" src="img/fuscaimg2.jpeg" alt="">
+
+                    <div class="infos">
+                        <h3>Maria Costa</h3>
+                        <span class="local">📍 Centro Histórico, Paraty - RJ
+                        </span>
+                        <span class="tempo"> 🕒 Postado há 8 minutos
+                        </span>
+                    </div>
+
+                    <div class="status">
+                        ✔ Já socado
+                    </div>
+                </div>
+
+                <div class="item-fusca">
+                    <img class="foto" src="img/fuscaimg3.jpeg" alt="">
+
+                    <div class="infos">
+                        <h3>Carlos Eduardo</h3>
+                        <span class="local">📍 Lagoa Rodrigo de Freitas - RJ
+                        </span>
+
+                        <span class="tempo">🕒 Postado há 11 minutos
+                        </span>
+
+                    </div>
+
+                    <button class="btn-soquinho">
+                        👊 Dar Soquinho
+                    </button>
+                </div>
+            </div>
+        </section>
+        </div>
+
+        <script src="app.js">
+        </script>
+
+        <footer class="d-flex fixed-bottom bg-body-tertiary">
+            <p class="p"><strong>Jogo - Fusca Azul <br> Projeto desenvolvido na <a
+                        href="https://fsw-ifc.brdrive.net/">Fábrica de software</a></strong></p>
+        </footer>
+</body>

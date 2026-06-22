@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fusca Azul • Layout Showcase</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6efe4;
+        --card: rgba(255, 251, 245, 0.88);
+        --card-strong: #fffdf8;
+        --ink: #1f2a22;
+        --muted: #5b665d;
+        --accent: #0f7a4f;
+        --accent-2: #e9a93d;
+        --danger: #b33b2e;
+        --line: rgba(31, 42, 34, 0.08);
+        --shadow: 0 24px 80px rgba(88, 67, 34, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top left, rgba(15, 122, 79, 0.18), transparent 28%),
+          radial-gradient(circle at right 20%, rgba(233, 169, 61, 0.18), transparent 22%),
+          linear-gradient(160deg, #f7f0e4 0%, #eef7ef 52%, #f8fafb 100%);
+        color: var(--ink);
+      }
+
+      #app {
+        min-height: 100vh;
+      }
+
+      .shell {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+
+      h1 {
+        font-family: "Fraunces", Georgia, serif;
+        font-size: clamp(2.8rem, 6vw, 4rem);
+        letter-spacing: -0.03em;
+        line-height: 0.92;
+        margin: 0 0 12px;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+        color: var(--muted);
+        margin: 0 0 48px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--card);
+        box-shadow: 0 4px 12px rgba(31, 42, 34, 0.06);
+        transition: all 200ms ease;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+        background: var(--card-strong);
+      }
+
+      .card-title {
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin: 0 0 12px;
+        color: var(--ink);
+      }
+
+      .card-desc {
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin: 0 0 16px;
+        flex-grow: 1;
+      }
+
+      .card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: gap 140ms ease;
+      }
+
+      .card-link:hover {
+        gap: 12px;
+      }
+
+      .card-link::after {
+        content: "→";
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 12px;
+      }
+
+      .status-wip {
+        background: rgba(233, 169, 61, 0.2);
+        color: #b8860b;
+      }
+
+      .status-done {
+        background: rgba(15, 122, 79, 0.2);
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="shell">
+        <h1>Layout Showcase</h1>
+        <p class="subtitle">Navegue pelas páginas do sistema Fusca Azul</p>
+
+        <div class="grid">
+          <a href="/layout/inicio.html" class="card">
+            <span class="status-badge status-done">pronto</span>
+            <h2 class="card-title">Início</h2>
+            <p class="card-desc">Página principal com apresentação do sistema</p>
+            <span class="card-link">Ver página</span>
+          </a>
+
+          <a href="/layout/login.html" class="card">
+            <span class="status-badge status-done">pronto</span>
+            <h2 class="card-title">Login</h2>
+            <p class="card-desc">Tela de autenticação de usuários</p>
+            <span class="card-link">Ver página</span>
+          </a>
+
+          <a href="/layout/criar-conta.html" class="card">
+            <span class="status-badge status-wip">em progresso</span>
+            <h2 class="card-title">Criar Conta</h2>
+            <p class="card-desc">Registro de novo usuário no sistema</p>
+            <span class="card-link">Ver página</span>
+          </a>
+
+          <a href="/layout/foto.html" class="card">
+            <span class="status-badge status-wip">em progresso</span>
+            <h2 class="card-title">Foto</h2>
+            <p class="card-desc">Exibição e interação com fotos de fuscas</p>
+            <span class="card-link">Ver página</span>
+          </a>
+
+          <a href="/layout/socar.html" class="card">
+            <span class="status-badge status-wip">em progresso</span>
+            <h2 class="card-title">Socar</h2>
+            <p class="card-desc">Registrar um soquinho em uma foto</p>
+            <span class="card-link">Ver página</span>
+          </a>
+
+          <a href="/layout/ranking.html" class="card">
+            <span class="status-badge status-done">pronto</span>
+            <h2 class="card-title">Ranking</h2>
+            <p class="card-desc">Placar de usuários com mais soquinhos</p>
+            <span class="card-link">Ver página</span>
+          </a>
+
+          <a href="/layout/contestar.html" class="card">
+            <span class="status-badge status-wip">em progresso</span>
+            <h2 class="card-title">Contestar</h2>
+            <p class="card-desc">Contestar um soquinho registrado</p>
+            <span class="card-link">Ver página</span>
+          </a>
+
+          <a href="/layout/denuncia.html" class="card">
+            <span class="status-badge status-wip">em progresso</span>
+            <h2 class="card-title">Denúncia</h2>
+            <p class="card-desc">Denunciar foto inválida ou problema</p>
+            <span class="card-link">Ver página</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

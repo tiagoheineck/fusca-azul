@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="foto.css">
+  <link rel="stylesheet" href="all.css">
+  <title>Fusca Azul</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand bg-body-tertiary">
+    <div class="container-fluid">
+      <img src="img/fusca2.png" class="img">
+      <a class="navbar-brand h1" href="inicio.html">Fusca Azul</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      </div>
+    </div>
+  </nav>
+
+  <aside id="menu" class="menu">
+    <div class="menu-topo">
+      <div class="logo">
+        <img src="img/fusca2.png" alt="">
+        <span>Fusca Azul</span>
+      </div>
+
+      <button class="btn" id="fecharMenu"><img src="img/excluir.png" alt=""></button>
+    </div>
+
+    <a href="inicio.html"><img src="img/casa.png"> Início</a>
+    <a href="foto.html"><img src="img/camera.png"> Postar Foto</a>
+    <a href="ranking.html"><img src="img/ranking.png"> Ranking</a>
+    <a href="socar.html"><img src="img/soco.png">Soquinhos</a>
+    <a href="denuncia.html"><img src="img/bandeiras.png"> Denunciar</a>
+    <a href="contestar.html"><img src="img/balao-de-fala.png"> Contestar</a>
+  </aside>
+
+
+  <main class="content">
+    <button class="menu-btn" onclick="toggleMenu()">
+      <img src="img/menu-aberto.png">
+    </button>
+
+    <section class="topo">
+
+      <div class="usuario">
+        <h1>Olá, João!</h1>
+      </div>
+
+      <div class="top-right">
+        <div class="soquinhos">
+          <img src="img/soco.png">
+          <div>
+            <strong>2450</strong>
+            <p>Soquinhos</p>
+          </div>
+        </div>
+
+        <div class="notificacao">
+          <img src="img/notificacao.png">
+        </div>
+        <img class="avatar" src="img/avatar.png">
+      </div>
+
+    </section>
+  </main>
+
+  <div class="container">
+
+    <div class="lines"></div>
+    <h1 class="titulo">Postar Foto</h1>
+
+    <div class="steps">
+      <div class="step active">
+        <span>1</span>
+        <p>Foto</p>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step">
+        <span>2</span>
+        <p>Localização</p>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step">
+        <span>3</span>
+        <p>Revisar</p>
+      </div>
+    </div>
+
+    <div class="card">
+
+      <h2>1. Tire uma foto do seu Fusca Azul</h2>
+
+      <p class="description">
+        Certifique-se de que o Fusca esteja bem visível na imagem.
+      </p>
+
+      <label class="upload-area">
+        <input type="file" hidden>
+
+        <div class="camera-icon">
+          <img src="img/camera.png" alt="">
+        </div>
+        <h3>Tirar foto</h3>
+      </label>
+
+      <div class="divider">
+        <span>ou</span>
+      </div>
+
+      <label class="gallery-btn">
+        <input type="file" hidden>Escolher da galeria
+      </label>
+
+      <div class="tips">
+        <h4>Dicas para uma boa foto</h4>
+        <ul>
+          <li>Mostre o Fusca completo</li>
+          <li>Boa iluminação</li>
+          <li>Foto tirada em local público</li>
+          <li>Nada de edições pesadas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+
+  <footer class="d-flex fixed-bottom bg-body-tertiary">
+    <p class="p"><strong>Jogo - Fusca Azul <br> Projeto desenvolvido na <a href="https://fsw-ifc.brdrive.net/">Fábrica
+          de software</a></strong></p>
+  </footer>
+</body>

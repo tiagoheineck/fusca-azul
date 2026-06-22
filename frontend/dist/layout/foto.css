@@ -1,0 +1,565 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f3f7ff;
+}
+
+.titulo {
+    color: #173b8d;
+}
+
+.menu {
+    position: fixed;
+    left: -320px;
+    top: 0;
+    width: 320px;
+    height: 100vh;
+    background: white;
+    transition: .3s;
+    z-index: 99999;
+}
+
+.menu.aberta {
+    left: 0;
+}
+
+.menu.ativo {
+    left: 0;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: #1f2c5c;
+    margin: 25px 0;
+    font-size: 18px;
+    z-index: 99999;
+}
+
+.menu a img {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+}
+
+.logo {
+    display: flex;
+}
+
+.menu-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+}
+
+.logo p {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.fecharMenu {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #1f3faa;
+}
+
+
+.content {
+    padding: 40px 60px;
+}
+
+
+.menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.menu-btn img {
+    width: 30px;
+}
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.usuario h1 {
+    color: #173b8d;
+    font-size: 42px;
+    margin-bottom: 5px;
+}
+
+.usuario p {
+    margin-bottom: 5px;
+}
+
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.soquinhos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+}
+
+.soquinhos img {
+    width: 28px;
+    height: 28px;
+}
+
+.notificacao img {
+    width: 28px;
+    height: 28px;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #8a93b2;
+}
+
+.step span {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e5e9f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.step.active {
+    color: #2563eb;
+}
+
+.step.active span {
+    background: #2563eb;
+    color: white;
+}
+
+.line {
+    width: 120px;
+    height: 2px;
+    background: #e5e9f5;
+    margin: 0 20px;
+}
+
+.lines {
+    width: 850px;
+    height: 2px;
+    background: #e5e9f5;
+    margin: 0;
+}
+
+.card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.description {
+    color: #667085;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.upload-area {
+    margin-top: 30px;
+    border: 2px dashed #3b82f6;
+    border-radius: 20px;
+    height: 260px;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: .3s;
+}
+
+.upload-area:hover {
+    background: #f5f9ff;
+}
+
+.camera-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.upload-area h3 {
+    font-size: 28px;
+    color: #2563eb;
+}
+
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: #dce2f0;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.divider span {
+    background: white;
+    padding: 0 15px;
+    color: #667085;
+}
+
+.gallery-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    height: 70px;
+
+    border: 1px solid #dce2f0;
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    color: #2563eb;
+    font-weight: 600;
+    font-size: 18px;
+
+    transition: .3s;
+}
+
+.gallery-btn:hover {
+    background: #f8fbff;
+}
+
+.tips {
+    margin-top: 30px;
+    background: #f4f7fd;
+    padding: 25px;
+    border-radius: 16px;
+}
+
+.tips h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.tips ul {
+    padding-left: 20px;
+}
+
+.tips li {
+    margin-bottom: 10px;
+    color: #5c678a;
+}
+
+@media (max-width: 768px) {
+
+    .content {
+        padding: 20px;
+    }
+
+    .menu {
+        width: 280px;
+    }
+
+    .topo {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: row;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .usuario {
+        width: 100%;
+    }
+
+    .usuario h1 {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .usuario p {
+        font-size: 16px;
+    }
+
+    .top-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .soquinhos {
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .notificacao img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .container {
+        width: 100%;
+        margin-top: 20px;
+        padding: 0;
+    }
+
+    .container h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .steps {
+        margin-bottom: 25px;
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .card h2 {
+        font-size: 22px;
+    }
+
+    .upload-area {
+        height: 220px;
+    }
+
+    .tips {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .content {
+        padding: 20px;
+    }
+
+    .menu {
+        width: 280px;
+    }
+
+
+    .lines {
+        width: 300px;
+        margin-left: 10px;
+    }
+
+    .menu {
+        width: 260px;
+    }
+
+    .topo {
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .usuario h1 {
+        font-size: 20px;
+    }
+
+
+    .top-right {
+        height: 20px;
+        gap: 15px;
+    }
+
+    .soquinhos {
+        padding: 5px;
+        border-radius: 12px;
+    }
+
+    .soquinhos strong {
+        font-size: 14px;
+    }
+
+    .soquinhos p {
+        font-size: 10px;
+    }
+
+    .avatar {
+        width: 22px;
+        height: 22px;
+    }
+
+    .notificacao img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .steps {
+        margin-bottom: 20px;
+    }
+
+    .step span {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .step p {
+        font-size: 10px;
+    }
+
+    .line {
+        width: 20px;
+        margin: 13px 4px 0;
+    }
+
+    .card {
+        padding: 15px;
+        border-radius: 14px;
+        margin-bottom: 20%;
+    }
+
+    .card h2 {
+        font-size: 16px;
+    }
+
+    .description {
+        font-size: 12px;
+    }
+
+    .upload-area {
+        height: 160px;
+    }
+
+    .camera-icon img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .upload-area h3 {
+        font-size: 16px;
+    }
+
+    .gallery-btn {
+        height: 50px;
+        font-size: 13px;
+    }
+
+    .tips {
+        padding: 12px;
+    }
+
+    .tips h4 {
+        font-size: 14px;
+    }
+
+    .tips li {
+        font-size: 12px;
+    }
+
+    .titulo {
+        margin-left: 10px;
+    }
+
+    footer {
+        padding: 10px;
+    }
+
+    footer p {
+        font-size: 10px;
+    }
+}

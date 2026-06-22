@@ -20,11 +20,13 @@ createApp({
     const loadingProtected = ref(false);
     const statusMessage = ref("");
     const errorMessage = ref("");
+    const protectedStatus = ref("");
     const protectedResult = ref("");
     const user = ref(loadUser());
     const token = ref(loadToken());
+    const tokenInput = ref(loadToken());
 
-    const isLoggedIn = computed(() => Boolean(token.value && user.value));
+    const isLoggedIn = computed(() => Boolean(token.value));
 
     function loadUser() {
       try {
@@ -63,6 +65,14 @@ createApp({
       return window.sessionStorage.getItem(storageKeys.exchangedCode) === code;
     }
 
+    function parseJsonSafe(text) {
+      try {
+        return text ? JSON.parse(text) : null;
+      } catch {
+        return null;
+      }
+    }
+
     async function startGoogleLogin() {
       loadingLogin.value = true;
       errorMessage.value = "";
@@ -72,10 +82,14 @@ createApp({
         const response = await fetch(
           `${gatewayBase}/auth-api/google/url?redirect_uri=${encodeURIComponent(callbackUrl)}`,
         );
-        const data = await response.json();
+        const text = await response.text();
+        const data = parseJsonSafe(text);
 
         if (!response.ok || !data.auth_url) {
-          throw new Error(data.message || data.error || "Falha ao iniciar login Google");
+          const fallback = text ? text.slice(0, 180) : "resposta vazia";
+          throw new Error(
+            data?.message || data?.error || `Falha ao iniciar login Google (${response.status}): ${fallback}`,
+          );
         }
 
         window.location.href = data.auth_url;
@@ -108,13 +122,15 @@ createApp({
           }),
         });
 
-        const data = await response.json();
+        const text = await response.text();
+        const data = parseJsonSafe(text);
         if (!response.ok || !data.access_token) {
           const detailedMessage =
-            data.message ||
-            [data.details?.error, data.details?.error_description].filter(Boolean).join(" - ") ||
-            data.error;
-          throw new Error(detailedMessage || "Falha ao trocar o código por token");
+            data?.message ||
+            [data?.details?.error, data?.details?.error_description].filter(Boolean).join(" - ") ||
+            data?.error ||
+            text?.slice(0, 180);
+          throw new Error(detailedMessage || `Falha ao trocar o código por token (${response.status})`);
         }
 
         persistSession(data.access_token, data.user);
@@ -135,7 +151,15 @@ createApp({
     async function fetchProtectedHealth() {
       loadingProtected.value = true;
       errorMessage.value = "";
+      protectedStatus.value = "";
       protectedResult.value = "";
+
+      if (!token.value) {
+        loadingProtected.value = false;
+        errorMessage.value = "Informe um token JWT para testar a rota protegida.";
+        protectedResult.value = "Sem token para enviar no header Authorization.";
+        return;
+      }
 
       try {
         const response = await fetch(`${gatewayBase}/health-api/health`, {
@@ -145,13 +169,29 @@ createApp({
         });
 
         const text = await response.text();
-        protectedResult.value = text;
+        protectedStatus.value = `${response.status} ${response.statusText}`;
+
+        try {
+          const jsonData = JSON.parse(text);
+          protectedResult.value = JSON.stringify(jsonData, null, 2);
+        } catch {
+          protectedResult.value = text || "(resposta sem corpo)";
+        }
 
         if (!response.ok) {
+          if (response.status === 401 || response.status === 403) {
+            statusMessage.value =
+              "Token inválido/expirado para rota protegida. Faça login novamente para obter um novo token.";
+          }
           throw new Error(`Falha ao chamar rota protegida: ${response.status}`);
         }
+
+        statusMessage.value = "Rota protegida validada com sucesso.";
       } catch (error) {
         errorMessage.value = error.message;
+        if (!protectedResult.value) {
+          protectedResult.value = "Não foi possível obter resposta da rota protegida.";
+        }
       } finally {
         loadingProtected.value = false;
       }
@@ -159,11 +199,36 @@ createApp({
 
     function logout() {
       clearSession();
+      tokenInput.value = "";
       statusMessage.value = "Sessão encerrada.";
       errorMessage.value = "";
       if (isCallback) {
         window.location.replace("/");
       }
+    }
+
+    function saveManualToken() {
+      const raw = tokenInput.value.trim();
+      if (!raw) {
+        errorMessage.value = "Cole um token JWT válido antes de salvar.";
+        return;
+      }
+
+      token.value = raw;
+      window.localStorage.setItem(storageKeys.token, raw);
+
+      if (!user.value) {
+        const localUser = {
+          name: "Sessão local",
+          email: "manual@fusca.local",
+          id: "manual-token",
+        };
+        user.value = localUser;
+        window.localStorage.setItem(storageKeys.user, JSON.stringify(localUser));
+      }
+
+      errorMessage.value = "";
+      statusMessage.value = "Token manual salvo. Agora você pode testar a rota protegida.";
     }
 
     function openCallbackPage() {
@@ -197,9 +262,12 @@ createApp({
       logout,
       openCallbackPage,
       protectedResult,
+      protectedStatus,
+      saveManualToken,
       startGoogleLogin,
       statusMessage,
       token,
+      tokenInput,
       user,
     };
   },
@@ -251,6 +319,21 @@ createApp({
             <span class="pill">3. /auth-api/google/exchange</span>
             <span class="pill">4. Bearer token no Kong</span>
           </div>
+          <div class="status" v-if="!isCallback" style="display: grid; gap: 10px; margin-top: 12px;">
+            <strong>Teste sem Google (token manual)</strong>
+            <textarea
+              v-model="tokenInput"
+              rows="3"
+              placeholder="Cole aqui o JWT para teste"
+              style="width: 100%; border-radius: 12px; border: 1px solid var(--line); padding: 10px; font-family: monospace; resize: vertical;"
+            ></textarea>
+            <div class="actions" style="margin-top: 0;">
+              <button class="button button-secondary" @click="saveManualToken">Salvar token manual</button>
+              <button class="button button-primary" @click="fetchProtectedHealth" :disabled="loadingProtected || !tokenInput.trim()">
+                {{ loadingProtected ? 'Consultando...' : 'Testar com token manual' }}
+              </button>
+            </div>
+          </div>
           <div v-if="statusMessage" class="status">
             <strong>Status atual</strong>
             <p>{{ statusMessage }}</p>
@@ -272,8 +355,15 @@ createApp({
           <p>
             Seu token já está salvo no navegador. Use o botão acima para validar a rota protegida do health-api via Kong.
           </p>
-          <div class="result" style="margin-top: 18px;" v-if="protectedResult">
-            <strong>Resposta da rota protegida</strong>
+          <div v-if="loadingProtected" class="result" style="margin-top: 18px;">
+            <strong>Carregando resposta...</strong>
+            <p style="color: var(--muted);">Consultando a rota protegida do health-api...</p>
+          </div>
+          <div class="result" style="margin-top: 18px;" v-else-if="protectedResult">
+            <strong>✓ Resposta da rota protegida (health-api)</strong>
+            <p style="font-size: 0.9rem; color: var(--muted); margin: 8px 0 12px;">
+              Status: {{ protectedStatus || 'desconhecido' }}
+            </p>
             <pre>{{ protectedResult }}</pre>
           </div>
           <div class="result" style="margin-top: 18px;" v-else>
